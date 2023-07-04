@@ -1,20 +1,26 @@
 #!/usr/bin/python3
+"""
+You have n number of locked boxes in front of you.
+Each box is numbered sequentially
+from 0 to n - 1 and each box may
+contain keys to the other boxes.
+"""
+
 
 def canUnlockAll(boxes):
-    n = len(boxes)  # Total number of boxes
-    visited = set()  # Set to keep track of visited boxes
+    """
+     a method that determines if all the boxes can be opened.
+    :param boxes:
+    :return: True or False
+    """
+    if not boxes or type(boxes) is not list:
+        return False
 
-    # Define a recursive helper function to perform DFS traversal
-    def dfs(box_index):
-        visited.add(box_index)  # Mark the current box as visited
-
-        # Iterate through the keys in the current box
-        for key in boxes[box_index]:
-            # If the key opens a box that we haven't visited yet, recursively visit that box
-            if key not in visited and key < n:
-                dfs(key)
-
-    dfs(0)  # Start the DFS traversal from the first box (boxes[0])
-
-    return len(visited) == n
-
+    unlocked = [0]
+    for n in unlocked:
+        for key in boxes[n]:
+            if key not in unlocked and key < len(boxes):
+                unlocked.append(key)
+    if len(unlocked) == len(boxes):
+        return True
+    return False
